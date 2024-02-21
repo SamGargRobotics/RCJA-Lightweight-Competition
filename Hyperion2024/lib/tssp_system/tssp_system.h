@@ -1,7 +1,7 @@
 #ifndef TSSP_SYSTEM_H
 #define TSSP_SYSTEM_H
 
-#include "Tssp.h"
+#include <Tssp.h>
 
 class Tssp_system {
 public:
