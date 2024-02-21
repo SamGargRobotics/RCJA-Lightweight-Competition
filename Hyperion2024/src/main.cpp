@@ -2,7 +2,7 @@
 #include <tssp_system.h> //tssp system header file
 #include <drive_system.h> //motor system header file
 
-Light_System ls_sys = light_system(A0); //Creating Light System
+Light_System ls_sys = Light_system(A0); //Creating Light System
 Tssp_system tssp_sys = Tssp_system(30); //Creating Tssp System
 Drive_system drive_sys = Drive_system(13, 22, 23); //Initializing Drive System
 
@@ -17,6 +17,4 @@ void setup() {
 }
 
 void loop() {
-  int ls_value_1 = ls_1.read(); //reading light sensor consistantly
-  Serial.println(ls_value_1);
 }

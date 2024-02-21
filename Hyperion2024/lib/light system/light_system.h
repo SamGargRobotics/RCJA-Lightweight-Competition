@@ -5,7 +5,7 @@
 
 class Light_System {
 public:
-    Light_System(uint8_t startPin); // Constructor
+    Light_system(uint8_t startPin); // Constructor
     void init();
 private:
     static const int NUM_SENSORS = 16; // Number of Light Sensors
