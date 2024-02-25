@@ -1,6 +1,8 @@
 #include <light_system.h> //Light system header file
 #include <tssp_system.h> //tssp system header file
 #include <drive_system.h> //motor system header file
+#include <bno.h>
+#include <camera.h>
 
 Light_System ls_sys = Light_System(A0); //Creating Light System
 Tssp_system tssp_sys = Tssp_system(30); //Creating Tssp System
