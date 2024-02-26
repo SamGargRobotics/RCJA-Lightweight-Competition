@@ -7,7 +7,7 @@ class Motor {
 public:
     Motor(int pwm_pin, int dir_a_pin, int dir_b_pin);
     void init();
-    int run(int speed, int direction_a, int direction_b);
+    void run(int speed, int direction_a, int direction_b);
 private:    
     int pwm;
     int dir_a;
