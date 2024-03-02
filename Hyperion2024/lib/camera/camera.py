@@ -15,7 +15,7 @@ while(True):
     goalBlobs = img.find_blobs(thresholds, x_stride=5, y_stride=5, area_threshold=50, pixel_threshold=50, merge=False, margin=23)
     blueBlobs = []
     yellowBlobs = []
-    data = []
+    data = [254, ]
     if goalBlobs:
         largestBlob = goalBlobs[0]
     for blob in goalBlobs:

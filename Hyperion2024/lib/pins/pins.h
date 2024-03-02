@@ -1,2 +1,17 @@
+//main.cpp Pins for objects
 #define TSSP_PIN 30
 #define LIGHT_PIN A0
+
+//Motor Pins that go into drive_system.cpp
+#define MOTOR_1_PWM 13
+#define MOTOR_1_A 22
+#define MOTOR_1_B 23
+#define MOTOR_2_PWM 12
+#define MOTOR_2_A 24
+#define MOTOR_2_B 25
+#define MOTOR_3_PWM 11
+#define MOTOR_3_A 26
+#define MOTOR_3_B 27
+#define MOTOR_4_PWM 10
+#define MOTOR_4_A 28
+#define MOTOR_4_B 29
