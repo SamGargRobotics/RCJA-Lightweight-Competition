@@ -9,7 +9,7 @@ public:
     void init();
     int read();
 private:
-    static const int NUM_TSSPS = 16; // Number of TSSPs
+    static const int NUM_TSSPS = 12; // Number of TSSPs
     uint8_t Pin;
     int readTssp[NUM_TSSPS];
 };

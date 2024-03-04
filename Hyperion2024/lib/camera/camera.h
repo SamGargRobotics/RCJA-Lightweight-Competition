@@ -6,7 +6,9 @@ class Camera {
 public:
     Camera() {};
     void init();
-    int read();
+    void read();
 private:
+    int cameraValues[4];
+    int i;
 };
 #endif
