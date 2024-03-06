@@ -7,7 +7,7 @@ class Tssp_system {
 public:
     Tssp_system(int startPin); // Constructor
     void init();
-    int read();
+    void read();
 private:
     static const int NUM_TSSPS = 12; // Number of TSSPs
     uint8_t Pin;

@@ -10,7 +10,7 @@ void Tssp_system::init() {
     }
 }
 
-int Tssp_system::read() {
+void Tssp_system::read() {
     for (int y = 0; y < 256; y++) {
         for (int i = 0; i < NUM_TSSPS; i++) {
             if (y == 0 && i == 0) {
@@ -19,5 +19,4 @@ int Tssp_system::read() {
             readTssp[i] += digitalRead(Pin + i);
         }
     }
-    return;
 }
