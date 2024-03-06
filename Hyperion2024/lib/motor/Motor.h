@@ -13,4 +13,6 @@ private:
     int dir_a;
     int dir_b;
 };
+
+//int MotorSpeeds[1][3] = {{100, HIGH, LOW}}
 #endif
