@@ -11,8 +11,8 @@
 #include <common.h> //Common master file
 
 //Objects
-Tssp_system tssp_sys = Tssp_system(TSSP_PIN); //Creating Tssp System
-Light_System ls_sys = Light_System(LIGHT_PIN); //Creating Light System
-Drive_system drive_sys = Drive_system(); //Creating Drive System
+Tssp_system tssp = Tssp_system(TSSP_PIN); //Creating Tssp System
+Light_System ls = Light_System(); //Creating Light System
+Drive_system drive = Drive_system(); //Creating Drive System
 bno::Adafruit_BNO055 compass; //Creating BNO
 sensors_event_t direction; //Creating BNO

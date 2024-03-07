@@ -3,9 +3,9 @@
 
 //Run through once (Arduino Setup)
 void setup() {
-  ls_sys.init(); //Initializing Light Sensors
-  tssp_sys.init(); //Initializing Tssps
-  drive_sys.init(); //Intializing Drive System
+  ls.init(); //Initializing Light Sensors
+  tssp.init(); //Initializing Tssps
+  drive.init(); //Intializing Drive System
   compass.setExtCrystalUse(true); //Initializing BNO
   Serial.begin(9600); //Intializing Serial
   while(!compass.begin()) {
