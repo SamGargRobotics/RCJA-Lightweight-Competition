@@ -2,7 +2,8 @@
 #include <init.h>
 
 //Run through once (Arduino Setup)
-void setup() {
+void setup() 
+{
   ls.init(); //Initializing Light Sensors
   tssp.init(); //Initializing Tssps
   drive.init(); //Intializing Drive System
@@ -14,6 +15,7 @@ void setup() {
 }
 
 //Run through continously (Arduino Loop)
-void loop() {
+void loop() 
+{
   compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
 }
