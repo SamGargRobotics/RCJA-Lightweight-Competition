@@ -2,7 +2,7 @@
 #include <init.h>
 
 //Run through once (Arduino Setup)
-void setup() 
+void setup()
 {
   ls.init(); //Initializing Light Sensors
   tssp.init(); //Initializing Tssps

@@ -1,10 +1,31 @@
 #include "drive_system.h"
 #include <pins.h>
+#include <math.h>
 
 void Drive_system::init() {
     for (int i = 0; i < NUM_MOTORS; i++) {
         motors[i].init();
     }
+}
+
+void Drive_system::run_all(int speed, int dir, int rotation) {
+    //dir = speed*cos(x);
+    dir = dir*DEG_TO_RAD;
+    for (int i = 0; i < NUM_MOTORS; i++) { 
+        hiJudges[i] = 2.55*speed*cos(a[i] - dir)+rotation; //speed is 0-100 >:(
+    }
+    hiJudges[1] = (2.55*speed)/hiJudges[1];
+    for (int i = 0; i < 4; i++) {
+        if (hiJudges[i] > largest) {
+            largest = hiJudges[i];
+        }
+    }
+    // largest = 0
+    // for i in hiJudges:
+    //     if i > largest:
+    //         largest = i
+    // }
+
 }
 
 // Define the pin configurations for each motor
