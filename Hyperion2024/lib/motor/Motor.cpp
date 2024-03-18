@@ -12,8 +12,16 @@ void Motor::init() {
     pinMode(dir_b, OUTPUT);
 }
 
-void Motor::run(int speed, int direction_a, int direction_b) {
-    analogWrite(pwm, speed);
-    digitalWrite(dir_a, direction_a);
-    digitalWrite(dir_b, direction_b);
+void Motor::run(int speed) {
+    if (speed > 0 ) {
+        digitalWrite(dir_a, HIGH);
+        digitalWrite(dir_b, LOW);
+    } else if (speed < 0) {
+        digitalWrite(dir_a, LOW);
+        digitalWrite(dir_b, HIGH);
+    } else {
+        digitalWrite(dir_a, LOW);
+        digitalWrite(dir_b, LOW);
+    }
+    analogWrite(pwm, abs(speed));
 }
