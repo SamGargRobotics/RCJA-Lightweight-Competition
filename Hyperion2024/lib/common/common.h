@@ -2,7 +2,6 @@
 
 int MotorSpeeds[1][3] = {{100, 1, 0}};
 
-
 #define PI 3.1415926535897932384626433832795
 #define HALF_PI 1.5707963267948966192313216916398
 #define TWO_PI 6.283185307179586476925286766559
@@ -16,6 +15,10 @@ int MotorSpeeds[1][3] = {{100, 1, 0}};
 #define PID_i 0
 #define PID_d 0 //how fast it slows down once it gets close to the 'p' point - tune this
 #define PID_abs_max 100 //The cap value that the PID can produce from the numbers given
+
+#define ANALOG_DIV_100 2.55
+#define SPEED_GRADIENT 100/-255
+#define SPEED_Y_INTERCEPT 100
 
 float compassVal = 0;
 float ballDirection = 0;

@@ -1,6 +1,7 @@
 #include "drive_system.h"
 #include <pins.h>
 #include <math.h>
+#include <common.h>
 
 void Drive_system::init() {
     for (int i = 0; i < NUM_MOTORS; i++) {
@@ -11,7 +12,7 @@ void Drive_system::init() {
 void Drive_system::run_all(int speed, int dir, int rotation) {
     dir = dir*DEG_TO_RAD;
     for (int i = 0; i < NUM_MOTORS; i++) { 
-        hiJudges[i] = 2.55*speed*cos(a[i] - dir)+rotation; //speed is 0-100 >:(
+        hiJudges[i] = ANALOG_DIV_100*speed*cos(a[i] - dir)+rotation; //speed is 0-100 >:(
     }
     for (int i = 0; i < NUM_MOTORS; i++) {
         if (abs(hiJudges[i]) > abs(largest)) {
@@ -19,7 +20,7 @@ void Drive_system::run_all(int speed, int dir, int rotation) {
         }
     }
     for (int i = 0; i < NUM_MOTORS; i++) {
-        hiJudges[i] = (hiJudges[i]/abs(largest))*2.55*speed;
+        hiJudges[i] = (hiJudges[i]/abs(largest))*ANALOG_DIV_100*speed;
     }
     for (int i = 0; i < NUM_MOTORS; i++) {
         motors[i].run(hiJudges[i]);
