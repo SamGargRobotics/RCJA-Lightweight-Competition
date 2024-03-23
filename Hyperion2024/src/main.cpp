@@ -23,11 +23,11 @@ void loop()
   if (compassVal < CIRCLE_DEGREES && compassVal > SEMI_CIRCLE_DEGREES) {
     compassVal -= CIRCLE_DEGREES;
   }
-  if (compass_correct.update(compassVal, 0) == 0) {
+  if (compass_correct.update(compassVal, 0) <= 20 || compass_correct.update(compassVal, 0) => 340) {
     motors.run_all(0, 0, compass_correct.update(compassVal, 0));
-    //motors.run_all(100, orbit.calculate_Direction(ballDirection), compass_correct.update(compassVal, 0))
+    //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
   } else {
     motors.run_all(0, 0, compass_correct.update(compassVal, 0));
-    //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction(ballDirection), compass_correct.update(compassVal, 0))
+    //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
   }
 }

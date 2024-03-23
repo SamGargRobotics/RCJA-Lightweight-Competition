@@ -42,3 +42,24 @@ int Orbit::calculate_Speed(int ballStrength)
     speed = (SPEED_GRADIENT)*ballStrength + SPEED_Y_INTERCEPT;
     return int(speed);
 }
+
+int Orbit::calculate_Direction2(int ballAngle2)
+{
+    if (ballAngle2 >= 340 && ballAngle2 < 360) {
+        return ballAngle2;
+    } else if (ballAngle2 <= 20 && ballAngle2 > 0) {
+        return ballAngle2;
+    } else if (ballAngle2 > 270 && ballAngle2 < 340) {
+        return ballAngle2 - 20;
+    } else if (ballAngle2 > 20 && ballAngle2 < 90) {
+        return ballAngle2 + 20;
+    } else if (ballAngle2 > 150 && ballAngle2 <= 180) {
+        return orbitDirections[2];
+    } else if (ballAngle2 > 180 && ballAngle2 < 210) {
+        return orbitDirections[4];
+    } else if (ballAngle2 > 210 && ballAngle2 <= 270) {
+        return orbitDirections[3];
+    } else if (ballAngle2 >= 90 && ballAngle2 < 150) {
+        return orbitDirections[3];
+    }
+}
