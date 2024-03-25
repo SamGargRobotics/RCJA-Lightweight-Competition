@@ -1,7 +1,5 @@
 #include <math.h>
 
-int MotorSpeeds[1][3] = {{100, 1, 0}};
-
 #define PI 3.1415926535897932384626433832795
 #define HALF_PI 1.5707963267948966192313216916398
 #define TWO_PI 6.283185307179586476925286766559
@@ -21,6 +19,8 @@ int MotorSpeeds[1][3] = {{100, 1, 0}};
 #define NEGATIVE_SPEED_GRADIENT 100/255
 #define SPEED_Y_INTERCEPT 100
 
-float compassVal = 0;
-float ballDirection = 0;
-int orbitDirections[8] = {0, 90, 180, 270, 90, 180, 270, 0};
+struct mainThings{
+    float compassVal = 0;
+    float ballDirection = 0;
+    int tsspValue = 0;
+};

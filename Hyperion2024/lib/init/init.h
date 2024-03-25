@@ -21,3 +21,4 @@ bno::Adafruit_BNO055 compass; //Creating BNO
 sensors_event_t direction; //Creating BNO
 PID compass_correct(PID_p, PID_i, PID_d, PID_abs_max);
 Orbit orbit;
+mainStuff mainThings;

@@ -18,10 +18,16 @@ void setup()
 void loop() 
 {
   compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
-  compassVal = direction.orientation.x;
-  ballDirection = tssp.read();
-  if (compassVal < CIRCLE_DEGREES && compassVal > SEMI_CIRCLE_DEGREES) {
-    compassVal -= CIRCLE_DEGREES;
+  mainThings.compassVal = direction.orientation.x;
+  mainThings.ballDirection = tssp.read();
+  if (mainThings.compassVal < CIRCLE_DEGREES && mainThings.compassVal > SEMI_CIRCLE_DEGREES) {
+    mainThings.compassVal -= CIRCLE_DEGREES;
   }
-  motors.run_all(calculate_Defense_Speed(tssp.tsspStrength), orbit.calculate_Defense_Direction(ballDirection), ballDirection);
+  if (compass_correct.update(mainThings.compassVal, 0) <= 20 || compass_correct.update(mainThings.compassVal, 0) >= 340) {
+    motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+    //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
+  } else {
+    motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+    //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
+  }
 }

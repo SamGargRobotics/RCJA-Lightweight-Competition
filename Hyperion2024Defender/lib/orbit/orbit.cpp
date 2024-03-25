@@ -67,9 +67,9 @@ int Orbit::calculate_Direction2(int ballAngle2)
 }
 
 int calculate_Defense_Direction(int ballAngle3) {
-    if (ballAngle3 < 360 && ballAngle3 => 180) {
+    if (ballAngle3 < 360 && ballAngle3 >= 180) {
         return 270; //!!!! in main, if you are using this function, you will correct to the angle the TSSPS give.
-    } else if (ballAngle3 => 0 && ballAngle3 < 180) {
+    } else if (ballAngle3 >= 0 && ballAngle3 < 180) {
         return 90; //!!!! in main, if you are using this function, you will correct to the angle the TSSPS give.
     } else {
         return 0;
@@ -77,6 +77,7 @@ int calculate_Defense_Direction(int ballAngle3) {
 }
 
 int calculate_Defense_Speed(int ballStrength2) {
+    int speed2 = 0;
     speed2 = (NEGATIVE_SPEED_GRADIENT)*ballStrength2 + SPEED_Y_INTERCEPT;
     return int(speed2);
 }
