@@ -24,5 +24,5 @@ void loop()
   if (mainthings.compassVal < CIRCLE_DEGREES && mainthings.compassVal > SEMI_CIRCLE_DEGREES) {
     mainthings.compassVal -= CIRCLE_DEGREES;
   }
-  motors.run_all(calculate_Defense_Speed(mainthings.tsspValue), orbit.calculate_Defense_Direction(mainthings.ballDirection), mainthings.ballDirection);
+  motors.run_all(orbit.calculate_Defense_Speed(tssp.tsspStrength), orbit.calculate_Defense_Direction(mainthings.ballDirection), mainthings.ballDirection);
 }

@@ -1,6 +1,6 @@
 //Include init.h
 #include <init.h>
-
+//yo test
 //Run through once (Arduino Setup)
 void setup()
 {
@@ -23,7 +23,7 @@ void loop()
   if (mainThings.compassVal < CIRCLE_DEGREES && mainThings.compassVal > SEMI_CIRCLE_DEGREES) {
     mainThings.compassVal -= CIRCLE_DEGREES;
   }
-  if (compass_correct.update(mainThings.compassVal, 0) <= 20 || compass_correct.update(mainThings.compassVal, 0) >= 340) {
+  if (mainThings.compassVal <= 20 && mainThings.compassVal >= -20) {
     motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
     //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
   } else {
