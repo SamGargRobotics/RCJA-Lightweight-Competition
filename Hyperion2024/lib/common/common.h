@@ -19,6 +19,8 @@
 #define NEGATIVE_SPEED_GRADIENT 100/255
 #define SPEED_Y_INTERCEPT 100
 
+#define line_avoidance_thresh 800
+
 struct mainStuff{
     float compassVal = 0;
     float ballDirection = 0;
