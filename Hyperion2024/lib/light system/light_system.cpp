@@ -22,14 +22,14 @@ void Light_System::mux(int muxPin) {
     }
 }
 
-int Light_System::lineAvoidance() {
+int Light_System::lineAvoidance2() {
     for (int i = 0; i < NUM_SENSORS; i++) {
         if (lightData[i] >= line_avoidance_thresh) {
             positiveData[i] = 1;
         }
     } for (int i = 0; i < NUM_SENSORS; i++) {
         if (lightData[i] == 1) {
-            firstSens = i+1
+            firstSens = i+1;
         }
     } for (int i = 0; i < NUM_SENSORS; i++) {
         if (lightData[firstSens+i] != 1) {
@@ -44,3 +44,61 @@ int Light_System::lineAvoidance() {
     movementAngle = (difference*22.5)-180;
     return movementAngle;
 } //promblem 1: It will think sensor 1 is the first sensor instead of sensor 9 due to the if statement at line 34.
+int Light_System::lineAvoidance() {
+    bool countStatement = true; //true = forwards, false = backwards
+    for (int i = 0; i < NUM_SENSORS; i++) {
+        positiveData[i] = lightData[i] >= line_avoidance_thresh? 1 : 0;
+    }
+    if (positiveData[15] == 1) {
+        countStatement = false;
+        for (int i = NUM_SENSORS; i > 0; i--) {
+            if (positiveData[i] != 1) {
+                firstSens = i+2;
+            }
+        }
+    } else {
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            if (positiveData[i] == 1) {
+                firstSens = i+1;
+                break;
+            }
+        }
+    }
+    // if (countStatement == false) {
+    //     for (int i = NUM_SENSORS; i > 0; i--) {
+    //         if ((firstSens-i) == 16) {
+    //             firstSens -= firstSens-i-16
+    //         }
+    //         if (positiveData[(firstSens-i) == 16?] != 1) {
+    //             lastSens = firstSens-i;
+    //             break;
+    //         }
+    //     }
+    // } else {
+    //     for (int i = 0; i < NUM_SENSORS; i++) {
+    //         if (positiveData[firstSens+i] != 1) {
+    //             lastSens = firstSens+i;
+    //         }
+    //     }
+    // }
+    if (countStatement == false) {
+        for (int i = 0; i < 16; i++) {
+            if (positiveData[(firstSens+i) >= 16? firstSens+i-16 : firstSens+i] != 1) {
+                lastSens = firstSens+i-16;
+            }
+        }
+    } else {
+        for (int i = 0; i < NUM_SENSORS; i++) {
+            if (positiveData[firstSens+i] != 1) {
+                lastSens = firstSens+i;
+            }
+        }
+    }
+    if (lastSens < firstSens) {
+        difference = lastSens - firstSens;
+    } else {
+        difference = firstSens - lastSens;
+    }
+    movementAngle = (difference*22.5)-180;
+    return movementAngle;
+}
