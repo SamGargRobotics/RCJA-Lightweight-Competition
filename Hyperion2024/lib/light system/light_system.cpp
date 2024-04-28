@@ -43,7 +43,7 @@ int Light_System::lineAvoidance2() {
     }
     movementAngle = (difference*22.5)-180;
     return movementAngle;
-} //promblem 1: It will think sensor 1 is the first sensor instead of sensor 9 due to the if statement at line 34.
+} 
 int Light_System::lineAvoidance() {
     bool countStatement = true; //true = forwards, false = backwards
     for (int i = 0; i < NUM_SENSORS; i++) {
@@ -64,23 +64,6 @@ int Light_System::lineAvoidance() {
             }
         }
     }
-    // if (countStatement == false) {
-    //     for (int i = NUM_SENSORS; i > 0; i--) {
-    //         if ((firstSens-i) == 16) {
-    //             firstSens -= firstSens-i-16
-    //         }
-    //         if (positiveData[(firstSens-i) == 16?] != 1) {
-    //             lastSens = firstSens-i;
-    //             break;
-    //         }
-    //     }
-    // } else {
-    //     for (int i = 0; i < NUM_SENSORS; i++) {
-    //         if (positiveData[firstSens+i] != 1) {
-    //             lastSens = firstSens+i;
-    //         }
-    //     }
-    // }
     if (countStatement == false) {
         for (int i = 0; i < 16; i++) {
             if (positiveData[(firstSens+i) >= 16? firstSens+i-16 : firstSens+i] != 1) {
@@ -94,11 +77,15 @@ int Light_System::lineAvoidance() {
             }
         }
     }
-    if (lastSens < firstSens) {
-        difference = lastSens - firstSens;
+    if (firstSens > lastSens) {
+        sensDif = (firstSens - lastSens)/2;
+        rsensDif = round(sensDif);
+        midSens = lastSens + sensDif;
     } else {
-        difference = firstSens - lastSens;
+        sensDif = (lastSens - firstSens)/2;
+        rsensDif = round(sensDif);
+        midSens = lastSens + sensDif;
     }
-    movementAngle = (difference*22.5)-180;
-    return movementAngle;
+    fdegs = (midSens*22.5)-180;
+    return fdegs;
 }

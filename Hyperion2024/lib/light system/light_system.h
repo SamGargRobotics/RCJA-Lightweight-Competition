@@ -24,6 +24,10 @@ private:
     int lastSens = 0;
     int difference = 0;
     int movementAngle = 0;
+    int sensDif = 0;
+    int rsensDif = 0;
+    int midSens = 0;
+    int fdegs = 0;
 };
 
 #endif
