@@ -15,19 +15,39 @@ void setup()
 }
 
 //Run through continously (Arduino Loop)
-void loop() 
-{
+// void loop() 
+// {
+//   compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
+//   mainThings.compassVal = direction.orientation.x;
+//   mainThings.ballDirection = tssp.read();
+//   if (mainThings.compassVal < CIRCLE_DEGREES && mainThings.compassVal > SEMI_CIRCLE_DEGREES) {
+//     mainThings.compassVal -= CIRCLE_DEGREES;
+//   }
+//   if (mainThings.compassVal <= 20 && mainThings.compassVal >= -20) {
+//     motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+//     //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
+//   } else {
+//     motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+//     //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
+//   }
+// }
+
+void loop() {
   compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
   mainThings.compassVal = direction.orientation.x;
   mainThings.ballDirection = tssp.read();
   if (mainThings.compassVal < CIRCLE_DEGREES && mainThings.compassVal > SEMI_CIRCLE_DEGREES) {
     mainThings.compassVal -= CIRCLE_DEGREES;
   }
-  if (mainThings.compassVal <= 20 && mainThings.compassVal >= -20) {
-    motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
-    //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
+  if (ls.lineAvoidance() > 0) {
+    motors.run_all(100, ls.lineAvoidance(), 0);
   } else {
-    motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
-    //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
+    if (mainThings.compassVal <= 20 && mainThings.compassVal >= -20) {
+      motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+      //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
+    } else {
+      motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+      //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
+  }
   }
 }

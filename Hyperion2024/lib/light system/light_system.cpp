@@ -52,8 +52,8 @@ int Light_System::lineAvoidance() {
     if (positiveData[15] == 1) {
         countStatement = false;
         for (int i = NUM_SENSORS; i > 0; i--) {
-            if (positiveData[i] != 1) {
-                firstSens = i+2;
+            if (positiveData[i-1] != 1) {
+                firstSens = i+1;
             }
         }
     } else {
@@ -65,7 +65,7 @@ int Light_System::lineAvoidance() {
         }
     }
     if (countStatement == false) {
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < NUM_SENSORS; i++) {
             if (positiveData[(firstSens+i) >= 16? firstSens+i-16 : firstSens+i] != 1) {
                 lastSens = firstSens+i-16;
             }
@@ -77,15 +77,11 @@ int Light_System::lineAvoidance() {
             }
         }
     }
-    if (firstSens > lastSens) {
-        sensDif = (firstSens - lastSens)/2;
-        rsensDif = round(sensDif);
-        midSens = lastSens + sensDif;
+    midSens = (firstSens+lastSens)/2;
+    if (firstSens < lastSens) {
+        fdegs = ((midSens-1)*22.5)-180;
     } else {
-        sensDif = (lastSens - firstSens)/2;
-        rsensDif = round(sensDif);
-        midSens = lastSens + sensDif;
+        fdegs = ((midSens-1)*22.5);
     }
-    fdegs = (midSens*22.5)-180;
     return fdegs;
 }

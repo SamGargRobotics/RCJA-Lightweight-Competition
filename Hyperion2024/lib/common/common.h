@@ -15,7 +15,7 @@
 #define PID_abs_max 100 //The cap value that the PID can produce from the numbers given
 
 #define ANALOG_DIV_100 2.55
-#define SPEED_GRADIENT 100/-255
+#define  SPEED_GRADIENT 100/-255
 #define NEGATIVE_SPEED_GRADIENT 100/255
 #define SPEED_Y_INTERCEPT 100
 
