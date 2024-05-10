@@ -1,6 +1,27 @@
-//Include init.h
-#include <init.h>
-//yo test
+#include <light_system.h> //Light system header file
+#include <tssp_system.h> //tssp system header file
+#include <drive_system.h> //motor system header file
+#include <camera.h> //camera header file
+#include <Adafruit_BNO055.h> //BNO File Header
+#include <PID.h> //PID master file
+#include <orbit.h> //Orbit master file
+#include <pins.h> //Pins master file
+#include <common.h> //Common master file
+
+
+
+
+Tssp_system tssp = Tssp_system(); // Creating IR ring System
+Light_System ls = Light_System(); //Creating Light System
+Drive_system motors = Drive_system(); //Creating Drive System
+Adafruit_BNO055 compass; //Creating BNO
+sensors_event_t direction; //Creating BNO
+PID compass_correct(PID_p, PID_i, PID_d, PID_abs_max);
+Orbit orbit;
+
+float compassVal = 0;
+float ballDirection = 0;
+
 //Run through once (Arduino Setup)
 void setup()
 {
@@ -18,35 +39,35 @@ void setup()
 // void loop() 
 // {
 //   compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
-//   mainThings.compassVal = direction.orientation.x;
-//   mainThings.ballDirection = tssp.read();
-//   if (mainThings.compassVal < CIRCLE_DEGREES && mainThings.compassVal > SEMI_CIRCLE_DEGREES) {
-//     mainThings.compassVal -= CIRCLE_DEGREES;
+//   compassVal = direction.orientation.x;
+//   ballDirection = tssp.read();
+//   if (compassVal < CIRCLE_DEGREES && compassVal > SEMI_CIRCLE_DEGREES) {
+//     compassVal -= CIRCLE_DEGREES;
 //   }
-//   if (mainThings.compassVal <= 20 && mainThings.compassVal >= -20) {
-//     motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+//   if (compassVal <= 20 && compassVal >= -20) {
+//     motors.run_all(0, 0, compass_correct.update(compassVal, 0));
 //     //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
 //   } else {
-//     motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+//     motors.run_all(0, 0, compass_correct.update(compassVal, 0));
 //     //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
 //   }
 // }
 
 void loop() {
   compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
-  mainThings.compassVal = direction.orientation.x;
-  mainThings.ballDirection = tssp.read();
-  if (mainThings.compassVal < CIRCLE_DEGREES && mainThings.compassVal > SEMI_CIRCLE_DEGREES) {
-    mainThings.compassVal -= CIRCLE_DEGREES;
+  compassVal = direction.orientation.x;
+  ballDirection = tssp.read();
+  if (compassVal < CIRCLE_DEGREES && compassVal > SEMI_CIRCLE_DEGREES) {
+    compassVal -= CIRCLE_DEGREES;
   }
   if (ls.lineAvoidance() > 0) {
     motors.run_all(100, ls.lineAvoidance(), 0);
   } else {
-    if (mainThings.compassVal <= 20 && mainThings.compassVal >= -20) {
-      motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+    if (compassVal <= 20 && compassVal >= -20) {
+      motors.run_all(0, 0, compass_correct.update(compassVal, 0));
       //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
     } else {
-      motors.run_all(0, 0, compass_correct.update(mainThings.compassVal, 0));
+      motors.run_all(0, 0, compass_correct.update(compassVal, 0));
       //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
   }
   }

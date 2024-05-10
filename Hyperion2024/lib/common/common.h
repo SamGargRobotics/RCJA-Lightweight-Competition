@@ -15,13 +15,21 @@
 #define PID_abs_max 100 //The cap value that the PID can produce from the numbers given
 
 #define ANALOG_DIV_100 2.55
-#define  SPEED_GRADIENT 100/-255
+#define SPEED_GRADIENT 100/-255
 #define NEGATIVE_SPEED_GRADIENT 100/255
 #define SPEED_Y_INTERCEPT 100
 
 #define line_avoidance_thresh 800
 
-struct mainStuff{
-    float compassVal = 0;
-    float ballDirection = 0;
-};
+#define TSSP1 30
+#define TSSP2 31
+#define TSSP3 32
+#define TSSP4 33
+#define TSSP5 34
+#define TSSP6 35
+#define TSSP7 36
+#define TSSP8 37
+#define TSSP9 38
+#define TSSP10 39
+#define TSSP11 40
+#define TSSP12 41

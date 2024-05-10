@@ -2,10 +2,11 @@
 #define TSSP_SYSTEM_H
 
 #include <Arduino.h>
+#include <common.h>
 
 class Tssp_system {
 public:
-    Tssp_system(int startPin); // Constructor
+    Tssp_system() {}; // Constructor
     void init();
     int read();
     int tsspStrength = 0;
@@ -13,6 +14,7 @@ private:
     static const int NUM_TSSPS = 12; // Number of TSSPs
     uint8_t Pin;
     int readTssp[NUM_TSSPS];
+    int tsspPins[NUM_TSSPS] = {TSSP1, TSSP2, TSSP3, TSSP4, TSSP5, TSSP7, TSSP8, TSSP9, TSSP10, TSSP11, TSSP12}; //pins.h defining each pin
     int largest = 0;
     int tsspNum = 0;
     int ballAngle = 0;

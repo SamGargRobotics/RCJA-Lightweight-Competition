@@ -10,28 +10,28 @@ void Light_System::init() {
 
 void Light_System::read() {
     for (int i = 0; i < NUM_SENSORS; i++) {
-        mux(i);
-        lightData[i] = analogRead(Pin);
+        setMuxChannel(i);
+        lightData[i] = analogRead(LIGHT_PIN);
     }
 }
 
-void Light_System::mux(int muxPin) {
+void Light_System::setMuxChannel(int channel) {
     for (int i = 0; i < NUM_MUX; i++) {
-        digitalWrite(muxList[i], muxPin%2);
-        muxPin = int(muxPin / 2);
+        digitalWrite(muxList[i], channel%2);
+        channel = int(channel / 2);
     }
 }
 
 int Light_System::lineAvoidance2() {
     for (int i = 0; i < NUM_SENSORS; i++) {
-        if (lightData[i] >= line_avoidance_thresh) {
-            positiveData[i] = 1;
-        }
-    } for (int i = 0; i < NUM_SENSORS; i++) {
+        positiveData[i] = (lightData[i] >= line_avoidance_thresh);
+    }
+    for (int i = 0; i < NUM_SENSORS; i++) {
         if (lightData[i] == 1) {
             firstSens = i+1;
         }
-    } for (int i = 0; i < NUM_SENSORS; i++) {
+    }
+    for (int i = 0; i < NUM_SENSORS; i++) {
         if (lightData[firstSens+i] != 1) {
             lastSens = firstSens+i;
         }
@@ -44,12 +44,12 @@ int Light_System::lineAvoidance2() {
     movementAngle = (difference*22.5)-180;
     return movementAngle;
 } 
-int Light_System::lineAvoidance() {
+int Light_System::lineAvoidance() { //change to do logic AFTER reading (not in the function)
     bool countStatement = true; //true = forwards, false = backwards
     for (int i = 0; i < NUM_SENSORS; i++) {
-        positiveData[i] = lightData[i] >= line_avoidance_thresh? 1 : 0;
+        positiveData[i] = (lightData[i] >= line_avoidance_thresh);
     }
-    if (positiveData[15] == 1) {
+    if (positiveData[15]) {
         countStatement = false;
         for (int i = NUM_SENSORS; i > 0; i--) {
             if (positiveData[i-1] != 1) {

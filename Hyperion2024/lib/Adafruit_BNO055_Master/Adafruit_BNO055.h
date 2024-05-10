@@ -29,7 +29,6 @@
 #include "imumaths.h"
 #include <Adafruit_Sensor.h>
 
-namespace bno {
 /** BNO055 Address A **/
 #define BNO055_ADDRESS_A (0x28)
 /** BNO055 Address B **/
@@ -327,5 +326,6 @@ private:
   int32_t _sensorID;
   adafruit_bno055_opmode_t _mode;
 };
-}
+
+
 #endif
