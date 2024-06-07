@@ -39,8 +39,12 @@ int Orbit::calculate_Direction(int ballAngle)
 
 int Orbit::calculate_Speed(int ballStrength)
 {
-    speed = (SPEED_GRADIENT)*ballStrength + SPEED_Y_INTERCEPT;
-    return int(speed);
+    speed = (SPEED_GRADIENT)*ballStrength + SPEED_Y_INTERCEPT + 93;
+    if(int(speed) > 255) {
+        return 255;
+    } else {
+        return int(speed);
+    }
 }
 
 int Orbit::calculate_Direction2(int ballAngle2)

@@ -22,10 +22,10 @@
 #define line_avoidance_thresh 800
 
 #define TSSP1 30
-#define TSSP2 31
-#define TSSP3 32
-#define TSSP4 33
-#define TSSP5 34
+#define TSSP2 36
+#define TSSP3 38
+#define TSSP4 41
+#define TSSP5 
 #define TSSP6 35
 #define TSSP7 36
 #define TSSP8 37
