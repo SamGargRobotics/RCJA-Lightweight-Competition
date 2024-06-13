@@ -21,15 +21,6 @@
 
 #define line_avoidance_thresh 800
 
-#define TSSP1 30
-#define TSSP2 36
-#define TSSP3 38
-#define TSSP4 41
-#define TSSP5 
-#define TSSP6 35
-#define TSSP7 36
-#define TSSP8 37
-#define TSSP9 38
-#define TSSP10 39
-#define TSSP11 40
-#define TSSP12 41
+//struct movingAngle {
+//    float moving_angle = 0;
+//};

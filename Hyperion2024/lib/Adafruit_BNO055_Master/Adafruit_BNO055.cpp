@@ -31,6 +31,7 @@
 
 #include <limits.h>
 #include <math.h>
+#include <common.h>
 
 #include "Adafruit_BNO055.h"
 

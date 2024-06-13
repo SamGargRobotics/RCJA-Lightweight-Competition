@@ -23,8 +23,11 @@ void Drive_system::run_all(int speed, int dir, int rotation) {
         hiJudges[i] = (hiJudges[i]/abs(largest))*ANALOG_DIV_100*speed;
     }
     for (int i = 0; i < NUM_MOTORS; i++) {
+        Serial.print(hiJudges[i]);
+        Serial.print(" ");
         motors[i].run(hiJudges[i]);
     }
+    Serial.println("");
 }
 
 // Define the pin configurations for each motor

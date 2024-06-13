@@ -1,9 +1,9 @@
 #include "Motor.h"
 
 Motor::Motor(int pwm_pin, int dir_a_pin, int dir_b_pin) {
-    pwm_pin = pwm;
-    dir_a_pin = dir_a;
-    dir_b_pin = dir_b;
+    pwm = pwm_pin;
+    dir_a = dir_a_pin;
+    dir_b = dir_b_pin;
 }
 
 void Motor::init() {

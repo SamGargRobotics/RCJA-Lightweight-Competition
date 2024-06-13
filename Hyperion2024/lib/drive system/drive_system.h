@@ -17,12 +17,12 @@ private:
                                 Motor(motor_pins[2][0], motor_pins[2][1], motor_pins[2][2]),
                                 Motor(motor_pins[3][0], motor_pins[3][1], motor_pins[3][2])
                                 };
-    float hiJudges[4];
-    int motorFace1 = 135*DEG_TO_RAD;
-    int motorFace2 = 225*DEG_TO_RAD;
-    int motorFace3 = 315*DEG_TO_RAD;
-    int motorFace4 = 45*DEG_TO_RAD;
-    int a[4] = {motorFace1, motorFace2, motorFace3, motorFace4};
+    int hiJudges[4];
+    float motorFace1 = 315*DEG_TO_RAD;
+    float motorFace2 = 45*DEG_TO_RAD;
+    float motorFace3 = 225*DEG_TO_RAD;
+    float motorFace4 = 135*DEG_TO_RAD;
+    float a[4] = {motorFace1, motorFace2, motorFace3, motorFace4};
     int largest = 0;
 };
 

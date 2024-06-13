@@ -11,10 +11,11 @@
 Tssp_system tssp = Tssp_system(); // Creating IR ring System
 Light_System ls = Light_System(); //Creating Light System
 Drive_system motors = Drive_system(); //Creating Drive System
-Adafruit_BNO055 compass; //Creating BNO
+Adafruit_BNO055 compass = Adafruit_BNO055(); //Creating BNO
 sensors_event_t direction; //Creating BNO
 PID compass_correct(PID_p, PID_i, PID_d, PID_abs_max);
 Orbit orbit;
+
 
 float compassVal = 0;
 float ballDirection = 0;
@@ -23,8 +24,8 @@ float ballDirection = 0;
 void setup()
 {
   //ls.init(); //Initializing Light Sensors
-  tssp.init(); //Initializing Tssps
-  //motors.init(); //Intializing Drive System
+  //tssp.init(); //Initializing Tssps
+  motors.init(); //Intializing Drive System
   //compass.setExtCrystalUse(true); //Initializing BNO
   Serial.begin(9600); //Intializing Serial
   //while(!compass.begin()) {
@@ -34,11 +35,13 @@ void setup()
 
 // ###### ACTUAL CODE:::::::
 void loop() {
-//   compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
-//   compassVal = direction.orientation.x;
-  ballDirection = tssp.read();
-  orbit.moving_angle = orbit.calculate_Direction(ballDirection);
-  Serial.println(orbit.moving_angle);
+  //compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
+  //compassVal = direction.orientation.x;
+  // ballDirection = tssp.read();
+  // move.moving_angle = orbit.calculate_Direction(ballDirection);
+  // Serial.println(ballDirection);
+  motors.run_all(100, 0, 0);
+  //motors.run_all(100, 0, 0);
 //   if (compassVal < CIRCLE_DEGREES && compassVal > SEMI_CIRCLE_DEGREES) {
 //     compassVal -= CIRCLE_DEGREES;
 //   }

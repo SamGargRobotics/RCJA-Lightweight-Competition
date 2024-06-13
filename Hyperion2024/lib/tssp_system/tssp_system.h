@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <common.h>
+#include <pins.h>
 
 class Tssp_system {
 public:
@@ -13,6 +14,7 @@ public:
 private:
     static const int NUM_TSSPS = 12; // Number of TSSPs
     uint8_t Pin;
+    uint8_t tsspCounter;
     int readTssp[NUM_TSSPS];
     int tsspPins[NUM_TSSPS] = {TSSP1, TSSP2, TSSP3, TSSP4, TSSP5, TSSP7, TSSP8, TSSP9, TSSP10, TSSP11, TSSP12}; //pins.h defining each pin
     int largest = 0;
