@@ -1,8 +1,8 @@
 //Tssp Pins
 #define TSSP1 30
 #define TSSP2 36
-#define TSSP3 38
-#define TSSP4 39
+#define TSSP3 39
+#define TSSP4 38
 #define TSSP5 41
 #define TSSP6 35
 #define TSSP7 37

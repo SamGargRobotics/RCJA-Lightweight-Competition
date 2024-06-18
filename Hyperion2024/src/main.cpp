@@ -1,59 +1,48 @@
-#include <light_system.h> //Light system header file
-#include <tssp_system.h> //tssp system header file
-#include <drive_system.h> //motor system header file
-#include <camera.h> //camera header file
-#include <Adafruit_BNO055.h> //BNO File Header
-#include <PID.h> //PID master file
-#include <orbit.h> //Orbit master file
-#include <pins.h> //Pins master file
-#include <common.h> //Common master file
+#include <light_system.h>
+#include <tssp_system.h>
+#include <drive_system.h>
+#include <camera.h>
+#include <PID.h>
+#include <orbit.h>
+#include <pins.h>
+#include <common.h>
+#include <MPU.h>
 
-Tssp_system tssp = Tssp_system(); // Creating IR ring System
-Light_System ls = Light_System(); //Creating Light System
-Drive_system motors = Drive_system(); //Creating Drive System
-Adafruit_BNO055 compass = Adafruit_BNO055(); //Creating BNO
-sensors_event_t direction; //Creating BNO
+
+Tssp_system tssp = Tssp_system();
+Light_System ls = Light_System();
+Drive_system motors = Drive_system();
 PID compass_correct(PID_p, PID_i, PID_d, PID_abs_max);
 Orbit orbit;
+MPU compass = MPU();
 
 
-float compassVal = 0;
-float ballDirection = 0;
+float compassVal = 0; //constant value of MPU
+float ballDirection = 0; //direction of ball (tssps)
+float MoveDir = 0; //direction to move (after orbit library calculation)
+float ballSpeedNum = 0; //tssp strength !!! CURRENTLY COMMENTED OUT
 
-//Run through once (Arduino Setup)
-void setup()
-{
-  //ls.init(); //Initializing Light Sensors
-  //tssp.init(); //Initializing Tssps
-  motors.init(); //Intializing Drive System
-  //compass.setExtCrystalUse(true); //Initializing BNO
-  Serial.begin(9600); //Intializing Serial
-  //while(!compass.begin()) {
-  //  Serial.println("NOOOOOOOOOOOoo bno ded ;("); //Checking if BNO dies ;((
-  //}
+
+void setup() {
+  //ls.init();
+  tssp.init();
+  //motors.init();
+  Serial.begin(9600);
+  compass.init();
 }
 
-// ###### ACTUAL CODE:::::::
+
 void loop() {
-  //compass.getEvent(&direction); //getting direction through BNo (direction.orientation.x)
-  //compassVal = direction.orientation.x;
-  // ballDirection = tssp.read();
-  // move.moving_angle = orbit.calculate_Direction(ballDirection);
-  // Serial.println(ballDirection);
-  motors.run_all(100, 0, 0);
-  //motors.run_all(100, 0, 0);
-//   if (compassVal < CIRCLE_DEGREES && compassVal > SEMI_CIRCLE_DEGREES) {
-//     compassVal -= CIRCLE_DEGREES;
-//   }
-//   if (ls.lineAvoidance() > 0) {
-//     motors.run_all(100, ls.lineAvoidance(), 0);
-//   } else {
-//     if (compassVal <= 20 && compassVal >= -20) {
-//       motors.run_all(0, 0, compass_correct.update(compassVal, 0));
-//       //motors.run_all(100, orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
-//     } else {
-//       motors.run_all(0, 0, compass_correct.update(compassVal, 0));
-//       //motors.run_all(orbit.calculate_Speed(tssp.tsspStrength), orbit.calculate_Direction2(ballDirection), compass_correct.update(compassVal, 0))
-//   }
-//   }
+  ballDirection = tssp.read();
+  MoveDir = orbit.calculate_Direction(ballDirection);
+  compassVal = compass.update();
+  //ballSpeedNum = orbit.calculate_Speed(tssp.tsspStrength); //getting tssp strength
+  // motors.run_all(50, MoveDir, 0); !!! //testing movement of robot according to ball
+
+
+  ////// PRINTING STUFF
+  // Serial.print("food: ");
+  // Serial.print(compassVal);
+  // Serial.println("");
+  // delayMicroseconds(3000000);
 }

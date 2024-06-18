@@ -37,13 +37,17 @@ int Orbit::calculate_Direction(int ballAngle)
     }
 }
 
-int Orbit::calculate_Speed(int ballStrength)
+int Orbit::calculate_Speed(int ballStrength, float tsspBallAngle)
 {
-    speed = (SPEED_GRADIENT)*ballStrength + SPEED_Y_INTERCEPT + 93;
-    if(int(speed) > 255) {
-        return 255;
+    if(tsspBallAngle > 10 || tsspBallAngle >= 350) {
+        return 100;
     } else {
-        return int(speed);
+        speed = (SPEED_GRADIENT)*ballStrength + SPEED_Y_INTERCEPT + 93;
+        if(int(speed) > 255) {
+            return 255;
+        } else {
+            return int(speed);
+        }
     }
 }
 
