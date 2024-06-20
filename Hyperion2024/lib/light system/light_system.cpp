@@ -1,5 +1,4 @@
 #include "light_system.h"
-#include <common.h>
 
 void Light_System::init() {
     for (int i = 0; i < NUM_MUX; i++) {

@@ -12,7 +12,7 @@ public:
     int read();
     int tsspStrength = 0;
 private:
-    static const int NUM_TSSPS = 12; // Number of TSSPs
+    static const int NUM_TSSPS = NUM_TSSP; // Number of TSSPs
     uint8_t Pin;
     uint8_t tsspCounter;
     int readTssp[NUM_TSSPS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

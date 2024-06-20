@@ -10,7 +10,9 @@ public:
     void init();
     void update();
     float floatMod(float x, float y);
+    void findTargetVal();
     float heading;
+    float targetVal;
 private:
     void readGyroscope(float gyroData[3]);
     void calibrate();
@@ -19,6 +21,7 @@ private:
     long previousDrift;
     float calibrationGyro;
     float drift = 0;
+    bool flag1 = 0;
 };
 
 #endif

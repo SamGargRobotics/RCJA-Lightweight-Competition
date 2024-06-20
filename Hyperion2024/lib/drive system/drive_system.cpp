@@ -11,7 +11,7 @@ void Drive_system::init() {
 
 void Drive_system::run_all(int speed, int dir, int rotation) {
     dir = dir*DEG_TO_RAD;
-    for (int i = 0; i < NUM_MOTORS; i++) { 
+    for (int i = 0; i < NUM_MOTORS; i++) {
         hiJudges[i] = ANALOG_DIV_100*speed*cos(a[i] - dir)+rotation; //speed is 0-100 >:(
     }
     for (int i = 0; i < NUM_MOTORS; i++) {
@@ -23,11 +23,11 @@ void Drive_system::run_all(int speed, int dir, int rotation) {
         hiJudges[i] = (hiJudges[i]/abs(largest))*ANALOG_DIV_100*speed;
     }
     for (int i = 0; i < NUM_MOTORS; i++) {
-        // Serial.print(hiJudges[i]);
-        // Serial.print(" ");
-        // motors[i].run(hiJudges[i]);
+        Serial.print(hiJudges[i]);
+        Serial.print(" ");
+        motors[i].run(hiJudges[i]); //womp womp
     }
-    // Serial.println("");
+    Serial.println("");
 }
 
 // Define the pin configurations for each motor

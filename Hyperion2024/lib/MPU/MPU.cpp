@@ -65,3 +65,11 @@ float MPU::floatMod(float x, float y) {
     if (mod < 0) mod += y;
     return mod;
 }
+
+void MPU::findTargetVal() {
+    if(!flag1) {
+        update();
+        targetVal = heading;
+        flag1 = 1;
+    }
+}

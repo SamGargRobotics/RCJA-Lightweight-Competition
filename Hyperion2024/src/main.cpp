@@ -18,31 +18,38 @@ MPU compass = MPU();
 
 
 float compassVal = 0; //constant value of MPU
+float targetValue = 0; //target value of the MPU
 float ballDirection = 0; //direction of ball (tssps)
-float MoveDir = 0; //direction to move (after orbit library calculation)
+float moveDir = 0; //direction to move (after orbit library calculation)
 float ballSpeedNum = 0; //tssp strength !!! CURRENTLY COMMENTED OUT
+bool flag1 = 0;
 
 
 void setup() {
   //ls.init();
-  tssp.init();
-  //motors.init();
+  //tssp.init();
+  // motors.init();
   Serial.begin(9600);
   compass.init();
 }
 
 
 void loop() {
-  ballDirection = tssp.read();
-  MoveDir = orbit.calculate_Direction(ballDirection);
-  compassVal = compass.update();
+  compass.findTargetVal();
+  compass.update();
+  // ballDirection = tssp.read();
+  // moveDir = orbit.calculate_Direction(ballDirection);
+  compassVal = compass.heading;
+  targetValue = compass.targetVal;
   //ballSpeedNum = orbit.calculate_Speed(tssp.tsspStrength); //getting tssp strength
-  // motors.run_all(50, MoveDir, 0); !!! //testing movement of robot according to ball
-
-
-  ////// PRINTING STUFF
-  // Serial.print("food: ");
-  // Serial.print(compassVal);
-  // Serial.println("");
-  // delayMicroseconds(3000000);
+  //motors.run_all(50, moveDir, compass.heading); !!! //testing movement of robot according to ball
+  // motors.run_all(100, 0, 0);
+  //// PRINTING STUFF
+  Serial.print("compVal: ");
+  Serial.print(compassVal);
+  Serial.print(" targetVal: ");
+  Serial.print(targetValue);
+  Serial.println("");
 }
+//ege.com
+//i like little boys

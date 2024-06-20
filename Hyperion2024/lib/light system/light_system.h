@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <pins.h>
+#include <common.h>
 
 class Light_System {
 public:
@@ -13,8 +14,8 @@ public:
     int lineAvoidance2();
     int lineAvoidance();
 private:
-    static const int NUM_SENSORS = 16; // Number of Light Sensors
-    static const int NUM_MUX = 4;
+    static const int NUM_SENSORS = NUM_LS; // Number of Light Sensors
+    static const int NUM_MUX = NUMBER_MUX;
     uint8_t pin;
     int pin_mux;
     int lightData[NUM_SENSORS];

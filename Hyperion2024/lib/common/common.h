@@ -34,6 +34,10 @@
 #define ACC_FULL_SCALE_8_G 0x10
 #define ACC_FULL_SCALE_16_G 0x18
 
+#define NUM_LS 16
+#define NUMBER_MUX 4
+#define NUM_TSSP 12
+
 //struct movingAngle {
 //    float moving_angle = 0;
 //};
