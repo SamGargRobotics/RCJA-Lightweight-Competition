@@ -20,13 +20,13 @@ int Tssp_system::read() {
         for (int i = 0; i < NUM_TSSPS; i++) {
             readTssp[i] += readTssp[i] + (1 - digitalRead(tsspPins[i]));
         }
-        delayMicroseconds(3);
+        delayMicroseconds(10);
     }
     for(uint8_t i = 0; i < NUM_TSSPS; i++){
         ignores[i] = (readTssp[i] == 255 || readTssp[i] == -1) ? 1 : 0;
     }
     for (int i = 0; i < NUM_TSSPS; i++) {
-        if(ignores[i]== 0) {
+        if(ignores[i] == 0) {
             if (readTssp[i] > largest) {
                 largest = readTssp[i];
                 tsspNum = i;
@@ -38,12 +38,21 @@ int Tssp_system::read() {
             addedAngles += readTssp[i];
         }
     }
+    Serial.print("tsspIgnores: ");
+    for (int i = 0; i < NUM_TSSPS; i++) {
+        Serial.print(ignores[i]);
+        Serial.print(" ");
+    }
+    Serial.println("");
+
+    if(tsspNum != 1 || tsspNum != 0) {
+        tsspNum++;
+    }
     tsspStrength = addedAngles/NUM_TSSPS;
-    tsspNum += 2;
-    if(tsspNum == 0) {
+    if(tsspNum == 1) {
         ballDirection = 0;
     } else {
-        ballDirection = tsspNum*27.6923076923;
+        ballDirection = (tsspNum)*30;
     }
     return ballDirection;
 }

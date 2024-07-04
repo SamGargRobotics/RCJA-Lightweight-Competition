@@ -15,7 +15,7 @@ void Motor::init() {
 void Motor::run(int speed) {
     if (speed > 0 ) {
         digitalWrite(dir_a, HIGH);
-        digitalWrite(dir_b, LOW);
+        digitalWrite(dir_b, LOW);   
     } else if (speed < 0) {
         digitalWrite(dir_a, LOW);
         digitalWrite(dir_b, HIGH);

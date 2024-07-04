@@ -9,25 +9,66 @@ void Drive_system::init() {
     }
 }
 
-void Drive_system::run_all(int speed, int dir, int rotation) {
-    dir = dir*DEG_TO_RAD;
-    for (int i = 0; i < NUM_MOTORS; i++) {
-        hiJudges[i] = ANALOG_DIV_100*speed*cos(a[i] - dir)+rotation; //speed is 0-100 >:(
-    }
-    for (int i = 0; i < NUM_MOTORS; i++) {
-        if (abs(hiJudges[i]) > abs(largest)) {
-            largest = hiJudges[i];
-        }
-    }
-    for (int i = 0; i < NUM_MOTORS; i++) {
-        hiJudges[i] = (hiJudges[i]/abs(largest))*ANALOG_DIV_100*speed;
-    }
-    for (int i = 0; i < NUM_MOTORS; i++) {
-        Serial.print(hiJudges[i]);
+void Drive_system::run_motors() {
+    Serial.print("MotorSpeeds: ");
+    for(int i = 0; i < NUM_MOTORS; i++) {
+        motors[i].run(motorSpeeds[i]);
+        Serial.print(motorSpeeds[i]);
+        motorSpeeds[i] = previousMotorSpeeds[i];
         Serial.print(" ");
-        motors[i].run(hiJudges[i]); //womp womp
     }
     Serial.println("");
+    delay(1000);
+}
+
+void Drive_system::ignoreChecking() {
+    for(int i = 0; i < NUM_MOTORS; i++) {
+        motorIgnore[i] = ((previousMotorSpeeds[i] < 0) && (motorSpeeds[i] > 0)) ? 1 : 0;
+        motorIgnore2[i] = ((previousMotorSpeeds[i] > 0) && (motorSpeeds[i] < 0)) ? 1 : 0;
+    }
+    for(int i = 0; i < NUM_MOTORS; i++) {
+        if(motorIgnore[i] == 1) {
+            motorSpeeds[i] = MOTOR_IGNORE_MOVEMENT;
+        }
+        if(motorIgnore2[i] == 1) {
+            motorSpeeds[i] = (-1*MOTOR_IGNORE_MOVEMENT);
+        }
+    }
+    for(int i = 0; i < NUM_MOTORS; i++) {
+        motorIgnore[i] = 0;
+        motorIgnore2[i] = 0;
+    }
+    flagCounter = MOTOR_FLAG_COUNTER;
+}
+
+void Drive_system::run_all(int speed, int dir, int rotation) {
+    if(dir == 90 || dir == 270) {
+        raah = true;
+    }
+    for (int i = 0; i < NUM_MOTORS; i++) {
+        motorSpeeds[i] = ANALOG_DIV_100*speed*cos(a[i] - (dir*DEG_TO_RAD))+rotation; //speed is 0-100 >:(
+    }
+    Serial.print("Before change: ");
+    for(int i = 0; i < NUM_MOTORS; i++) {
+        Serial.print(motorSpeeds[i]);
+        Serial.print(" ");
+    }
+    Serial.println();
+    largest = max(abs(motorSpeeds[0]), max(abs(motorSpeeds[1]), max(abs(motorSpeeds[2]), abs(motorSpeeds[3]))));
+    for (int i = 0; i < NUM_MOTORS; i++) {
+        motorSpeeds[i] = (motorSpeeds[i]/abs(largest))*ANALOG_DIV_100*speed;
+    }
+    for (int i  = 0; i < NUM_MOTORS; i++) {
+        motorSpeeds[i] = int(motorSpeeds[i]);
+    }
+    if(raah == true) {
+        motorSpeeds[0] *= -1;
+        motorSpeeds[3] *= -1;
+    }
+    motorSpeeds[1] *= -1;
+    motorSpeeds[3] *= -1;
+    ignoreChecking();
+    run_motors();
 }
 
 // Define the pin configurations for each motor

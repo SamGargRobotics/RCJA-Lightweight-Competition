@@ -20,15 +20,19 @@
 #define LIGHT_PIN_DIGI_4 45
 
 //Motor Pins
-#define MOTOR_1_PWM 12 //Bottom Left
-#define MOTOR_1_A 22
-#define MOTOR_1_B 23
-#define MOTOR_2_PWM 13 //Top Left
-#define MOTOR_2_A 25
-#define MOTOR_2_B 24
-#define MOTOR_3_PWM 10 //Top Right
-#define MOTOR_3_A 53
-#define MOTOR_3_B 52
-#define MOTOR_4_PWM 11 //Bottom Right
-#define MOTOR_4_A 50
-#define MOTOR_4_B 51
+#define MOTORFACE1 315 //Top Left
+#define MOTOR_1_PWM 13
+#define MOTOR_1_A 25
+#define MOTOR_1_B 24
+#define MOTORFACE2 135 //Bottom Right
+#define MOTOR_2_PWM 11
+#define MOTOR_2_A 51
+#define MOTOR_2_B 50
+#define MOTORFACE3 45 //Top Right
+#define MOTOR_3_PWM 10
+#define MOTOR_3_A 52
+#define MOTOR_3_B 53
+#define MOTORFACE4 225 //Bottom Left
+#define MOTOR_4_PWM 12
+#define MOTOR_4_A 23
+#define MOTOR_4_B 22

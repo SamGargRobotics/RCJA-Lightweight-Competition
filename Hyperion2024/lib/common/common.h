@@ -9,9 +9,9 @@
 #define CIRCLE_DEGREES 360
 #define SEMI_CIRCLE_DEGREES 180
 
-#define PID_p 0 //how fast it goes towards the point that you want - tune this
+#define PID_p 0.3 //how fast it goes towards the point that you want - tune this
 #define PID_i 0
-#define PID_d 0 //how fast it slows down once it gets close to the 'p' point - tune this
+#define PID_d 0.05 //how fast it slows down once it gets close to the 'p' point - tune this
 #define PID_abs_max 100 //The cap value that the PID can produce from the numbers given
 
 #define ANALOG_DIV_100 2.55
@@ -37,6 +37,13 @@
 #define NUM_LS 16
 #define NUMBER_MUX 4
 #define NUM_TSSP 12
+
+#define ORBIT_MULTIPLIER 2.71828182846
+
+#define MOTOR_IGNORE_MOVEMENT 95
+#define MOTOR_FLAG_COUNTER 1
+#define SET_MOVE_DIR 0
+#define MOVEMENTSPEED 100
 
 //struct movingAngle {
 //    float moving_angle = 0;

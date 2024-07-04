@@ -73,3 +73,8 @@ int Orbit::calculate_Direction2(int ballAngle2)
         return 0;
     }
 }
+
+int Orbit::calculate_Direction3(int ballAngle3) {
+    //ballAngleOffset = min(0.04*ORBIT_MULTIPLIER^(4.5*ballAngle3), 90);
+    return ballAngleOffset;
+}
