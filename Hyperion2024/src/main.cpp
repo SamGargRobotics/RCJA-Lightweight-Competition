@@ -44,22 +44,19 @@ void loop() {
   compassVal = compass.heading; //!! works
   targetValue = compass.targetVal; //!! works
   double correction = compass_correct.update(compass.heading > 180 ? compass.heading - 360 : compass.heading, 0);
+  Serial.println(correction);
   // ballSpeedNum = orbit.calculate_Speed(tssp.tsspStrength); //getting tssp strength
-  if(abs(correction) > 7) {
-    motors.run_all(MOVEMENTSPEED,0,0);
-  } else {
-    motors.run_all(MOVEMENTSPEED,0,0);
-  } //testing movement of robot according to ball //(dir) 57 and less works anything 58 and above is ded
+  motors.update(100, ballDirection, 0, correction); //testing movement of robot according to ball //(dir) 57 and less works anything 58 and above is ded
   //PRINTING STUFF
-  Serial.print("ballDir: ");
-  Serial.print(ballDirection);
-  Serial.print(" ");
-  Serial.print("big: ");
-  Serial.print("");
-  //Serial.print(" ");
-  Serial.print("balls: ");
-  Serial.print(tssp.tsspNum);
-  Serial.println("");
+  // Serial.print("ballDir: ");
+  // Serial.print(ballDirection);
+  // Serial.print(" ");
+  // Serial.print("big: ");
+  // Serial.print("");
+  // //Serial.print(" ");
+  // Serial.print("balls: ");
+  // Serial.print(tssp.tsspNum);
+  // Serial.println("");
 }
 //ege.com
 //i like little boys

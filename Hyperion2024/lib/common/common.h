@@ -45,6 +45,14 @@
 #define SET_MOVE_DIR 0
 #define MOVEMENTSPEED 100
 
+#define FRANGLE 45
+#define BRANGLE 135
+#define BLANGLE 225
+#define FLANGLE 315
+
+#define MOTOR_NUM 4
+
+
 //struct movingAngle {
 //    float moving_angle = 0;
 //};

@@ -20,6 +20,23 @@
 #define LIGHT_PIN_DIGI_4 45
 
 //Motor Pins
+#define FRINA 51
+#define FRINB 50
+#define FRPWM 11
+
+#define BRINA 52
+#define BRINB 53 
+#define BRPWM 10 
+
+#define BLINA 22
+#define BLINB 23
+#define BLPWM 12
+
+#define FLINA 24
+#define FLINB 25
+#define FLPWM 13
+
+
 #define MOTORFACE1 315 //Top Left
 #define MOTOR_1_PWM 13
 #define MOTOR_1_A 25

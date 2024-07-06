@@ -38,12 +38,12 @@ int Tssp_system::read() {
             addedAngles += readTssp[i];
         }
     }
-    Serial.print("tsspIgnores: ");
-    for (int i = 0; i < NUM_TSSPS; i++) {
-        Serial.print(ignores[i]);
-        Serial.print(" ");
-    }
-    Serial.println("");
+    // Serial.print("tsspIgnores: ");
+    // for (int i = 0; i < NUM_TSSPS; i++) {
+    //     Serial.print(ignores[i]);
+    //     Serial.print(" ");
+    // }
+    // Serial.println("");
 
     if(tsspNum != 1 || tsspNum != 0) {
         tsspNum++;
