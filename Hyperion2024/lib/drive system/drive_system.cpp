@@ -16,7 +16,7 @@ void Drive_system::update(float speed, float angle, float heading, float correct
     float minSpeed = 5000;
     for(uint8_t i = 0; i < MOTOR_NUM; i++){
         values[i] = sinf(DEG_TO_RAD * (angles[i] - angle)) * speed + correction;
-        Serial.print(values[i]); Serial.print(' ');
+        // Serial.print(values[i]); Serial.print(' ');
         if(abs(values[i]) > maxSpeed){
             maxSpeed = abs(values[i]);
         }
@@ -24,7 +24,7 @@ void Drive_system::update(float speed, float angle, float heading, float correct
             minSpeed = abs(values[i]);
         }
     }
-    Serial.println();
+    // Serial.println();
     for(uint8_t i = 0; i < MOTOR_NUM; i++){
         float scaledSpeed = 94 + ((255 - 94) / 100.0) * abs(values[i]);
         analogWrite(pwm[i], (uint8_t)constrain(scaledSpeed, 94, 255));

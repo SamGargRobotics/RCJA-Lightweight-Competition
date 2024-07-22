@@ -1,6 +1,8 @@
 #ifndef ORBIT_H
 #define ORBIT_H
 
+#include <Arduino.h>
+
 class Orbit {
 public:
     Orbit() {};
@@ -12,6 +14,10 @@ public:
 private:
     int speed = 0;
     int orbitDirections[8] = {0, 90, 180, 270, 90, 180, 270, 0};
+    float ORBIT_MULTIPLIER = 2.71828182846;
+    float thing = 0;
+    float powpow = 0;
+    int returnVal = 0;
 };
 
 #endif

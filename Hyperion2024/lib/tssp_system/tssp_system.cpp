@@ -13,14 +13,25 @@ int Tssp_system::read() {
     addedAngles = 0;
     tsspStrength = 0;
     ballAngle = 0;
+    check = 1;
     for(int i = 0; i < NUM_TSSPS; i++) {
         readTssp[i] = 0;
     }
     for (int y = 0; y < 255; y++) {
         for (int i = 0; i < NUM_TSSPS; i++) {
-            readTssp[i] += readTssp[i] + (1 - digitalRead(tsspPins[i]));
+            readTssp[i] += (1 - digitalRead(tsspPins[i]));
         }
         delayMicroseconds(10);
+    }
+    for (int i = 0; i < NUM_TSSPS; i++) {
+        Serial.print(readTssp[i]);
+        // Serial.print(" Help: ");
+        // Serial.print(ignores[i]);
+        Serial.print(" ");
+    }
+    Serial.println();
+    if (readTssp[0] == 0 && readTssp[1] == 0 && readTssp[2] == 0 && readTssp[3] == 0 && readTssp[4] == 0 && readTssp[5] == 0 && readTssp[6] == 0 && readTssp[7] == 0 && readTssp[8] == 0 && readTssp[9] == 0 && readTssp[10] == 0 && readTssp[11] == 0 && readTssp[12] == 0) {
+        check = 0;
     }
     for(uint8_t i = 0; i < NUM_TSSPS; i++){
         ignores[i] = (readTssp[i] == 255 || readTssp[i] == -1) ? 1 : 0;
@@ -44,7 +55,6 @@ int Tssp_system::read() {
     //     Serial.print(" ");
     // }
     // Serial.println("");
-
     if(tsspNum != 1 || tsspNum != 0) {
         tsspNum++;
     }
@@ -54,5 +64,6 @@ int Tssp_system::read() {
     } else {
         ballDirection = (tsspNum)*30;
     }
+    prevBallDir = ballDirection;
     return ballDirection;
 }

@@ -39,6 +39,7 @@ int Orbit::calculate_Direction(int ballAngle)
 
 int Orbit::calculate_Speed(int ballStrength, float tsspBallAngle)
 {
+    ballStrength = abs(ballStrength);
     if(tsspBallAngle > 10 || tsspBallAngle >= 350) {
         return 100;
     } else {
@@ -75,6 +76,18 @@ int Orbit::calculate_Direction2(int ballAngle2)
 }
 
 int Orbit::calculate_Direction3(int ballAngle3) {
-    //ballAngleOffset = min(0.04*ORBIT_MULTIPLIER^(4.5*ballAngle3), 90);
-    return ballAngleOffset;
+    powpow = pow(ORBIT_MULTIPLIER, 4.5*ballAngle3);
+    thing = 0.04*powpow;
+    ballAngleOffset = min(thing, 90);
+    //y=min(0.04(2.71828182846^4.5*x), 90)
+    // Serial.print(ballAngleOffset);
+    // Serial.print(" ");
+    if(ballAngle3 > 180) {
+        returnVal = ballAngle3 + (ballAngleOffset*-1);
+    } else {
+        returnVal = ballAngle3 + ballAngleOffset;
+    }
+    // Serial.print(returnVal);
+    // Serial.println("");
+    return returnVal;
 }
