@@ -16,7 +16,7 @@ private:
     static const int NUM_TSSPS = NUM_TSSP; // Number of TSSPs
     uint8_t Pin;
     uint8_t tsspCounter;
-    int readTssp[NUM_TSSPS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int readTssp[NUM_TSSPS] = {0};
     int tsspPins[NUM_TSSPS] = {TSSP1, TSSP2, TSSP3, TSSP4, TSSP5, TSSP6, TSSP7, TSSP8, TSSP9, TSSP10, TSSP11, TSSP12}; //pins.h defining each pin
     int ignores[NUM_TSSPS] = {0};
     int largest = 0;

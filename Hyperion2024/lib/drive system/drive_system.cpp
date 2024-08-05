@@ -27,8 +27,11 @@ void Drive_system::update(float speed, float angle, float heading, float correct
     // Serial.println();
     for(uint8_t i = 0; i < MOTOR_NUM; i++){
         float scaledSpeed = 94 + ((255 - 94) / 100.0) * abs(values[i]);
+        // Serial.print(scaledSpeed);
+        // Serial.print(" ");
         analogWrite(pwm[i], (uint8_t)constrain(scaledSpeed, 94, 255));
         digitalWrite(inA[i], (values[i]) > 0);
         digitalWrite(inB[i], (values[i]) < 0);
     }
+    // Serial.println();
 }

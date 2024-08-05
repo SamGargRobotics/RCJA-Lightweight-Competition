@@ -25,6 +25,7 @@ float ballSpeedNum = 0; //tssp strength !!! CURRENTLY COMMENTED OUT
 bool flag1 = 0;
 int temp = 0;
 float moveSpeed = 0;
+int ballStr = 0;
 
 
 void setup() {
@@ -40,27 +41,19 @@ void loop() {
   compass.findTargetVal(); //!! works
   compass.update(); //!! works
   ballDirection = tssp.read();
-  moveDir = orbit.calculate_Direction2(ballDirection);
-  temp = orbit.calculate_Direction3(ballDirection);
+  temp = orbit.calculate_Direction2(ballDirection);
+  moveDir = orbit.calculate_Direction3(ballDirection);
   compassVal = compass.heading; //!! works
   targetValue = compass.targetVal; //!! works
-  moveSpeed = orbit.calculate_Speed(tssp.tsspStrength, ballDirection);
+  ballStr = tssp.tsspStrength;
+  moveSpeed = orbit.calculate_Speed(ballStr, ballDirection);
   double correction = compass_correct.update(compass.heading > 180 ? compass.heading - 360 : compass.heading, 0);
   // Serial.println(correction);
   // ballSpeedNum = orbit.calculate_Speed(tssp.tsspStrength); //getting tssp strength
   motors.update(moveSpeed, moveDir, 0, correction);
-  //motors.update(100, ballDirection, 0, correction); //testing movement of robot according to ball //(dir) 57 and less works anything 58 and above is ded
   //PRINTING STUFF
-  // Serial.print("ballDir: ");
-  // Serial.print(ballDirection);
-  // Serial.print(" ");
-  // Serial.print("big: ");
-  // Serial.print("");
-  // //Serial.print(" ");
-  // Serial.print("balls: ");
-  // Serial.print(tssp.tsspNum);
-  // Serial.println("");
-  //Serial.println(tssp.tsspStrength);
+  Serial.print(moveSpeed);
+  Serial.print(" ");
+  Serial.print(ballStr);
+  Serial.println();
 }
-//ege.com
-//i like little boys

@@ -9,15 +9,16 @@
 #define CIRCLE_DEGREES 360
 #define SEMI_CIRCLE_DEGREES 180
 
-#define PID_p 0.3 //how fast it goes towards the point that you want - tune this
+#define PID_p 1 //how fast it goes towards the point that you want - tune this
 #define PID_i 0
 #define PID_d 0.05 //how fast it slows down once it gets close to the 'p' point - tune this
 #define PID_abs_max 100 //The cap value that the PID can produce from the numbers given
 
 #define ANALOG_DIV_100 2.55
 #define SPEED_GRADIENT 100/-255
-#define NEGATIVE_SPEED_GRADIENT 100/255
-#define SPEED_Y_INTERCEPT 100
+#define NEGATIVE_SPEED_GRADIENT -1
+#define SPEED_Y_INTERCEPT 68
+#define ADD_OR_SUBTRACT_ORBIT 60
 
 #define line_avoidance_thresh 800
 

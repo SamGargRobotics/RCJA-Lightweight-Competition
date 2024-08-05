@@ -21,14 +21,14 @@ int Tssp_system::read() {
         for (int i = 0; i < NUM_TSSPS; i++) {
             readTssp[i] += (1 - digitalRead(tsspPins[i]));
         }
-        delayMicroseconds(10);
+        delayMicroseconds(3);
     }
-    for (int i = 0; i < NUM_TSSPS; i++) {
-        Serial.print(readTssp[i]);
-        // Serial.print(" Help: ");
-        // Serial.print(ignores[i]);
-        Serial.print(" ");
-    }
+    // for (int i = 0; i < NUM_TSSPS; i++) {
+    //     Serial.print(readTssp[i]);
+    //     // Serial.print(" Help: ");
+    //     // Serial.print(ignores[i]);
+    //     Serial.print(" ");
+    // }
     Serial.println();
     if (readTssp[0] == 0 && readTssp[1] == 0 && readTssp[2] == 0 && readTssp[3] == 0 && readTssp[4] == 0 && readTssp[5] == 0 && readTssp[6] == 0 && readTssp[7] == 0 && readTssp[8] == 0 && readTssp[9] == 0 && readTssp[10] == 0 && readTssp[11] == 0 && readTssp[12] == 0) {
         check = 0;
@@ -59,11 +59,7 @@ int Tssp_system::read() {
         tsspNum++;
     }
     tsspStrength = addedAngles/NUM_TSSPS;
-    if(tsspNum == 1) {
-        ballDirection = 0;
-    } else {
-        ballDirection = (tsspNum)*30;
-    }
+    ballDirection = (tsspNum-1)*30;
     prevBallDir = ballDirection;
     return ballDirection;
 }
