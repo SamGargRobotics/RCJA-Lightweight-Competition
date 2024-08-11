@@ -79,7 +79,7 @@ int Orbit::calculate_Direction3(int ballAngle3) {
     powpow = pow(ORBIT_MULTIPLIER, 4.5*ballAngle3);
     thing = 0.04*powpow;
     ballAngleOffset = min(thing, ADD_OR_SUBTRACT_ORBIT);
-    //y=min(0.04(2.71828182846^4.5*x), 90)
+    //y=min(0.04(2.71828182846^4.5*x), 60)
     // Serial.print(ballAngleOffset);
     // Serial.print(" ");
     if(ballAngle3 > 180) {

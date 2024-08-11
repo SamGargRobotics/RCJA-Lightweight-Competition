@@ -26,6 +26,14 @@ int Light_System::lineAvoidance2() {
         positiveData[i] = (lightData[i] >= line_avoidance_thresh);
     }
     for (int i = 0; i < NUM_SENSORS; i++) {
+        if (positiveData[i] != 0) {
+            isLineAvoidance = false;
+            break;
+        } else {
+            isLineAvoidance = true;
+        }
+    }
+    for (int i = 0; i < NUM_SENSORS; i++) {
         if (lightData[i] == 1) {
             firstSens = i+1;
         }
@@ -47,6 +55,14 @@ int Light_System::lineAvoidance() { //change to do logic AFTER reading (not in t
     bool countStatement = true; //true = forwards, false = backwards
     for (int i = 0; i < NUM_SENSORS; i++) {
         positiveData[i] = (lightData[i] >= line_avoidance_thresh);
+    }
+    for (int i = 0; i < NUM_SENSORS; i++) {
+        if (positiveData[i] != 0) {
+            isLineAvoidance = false;
+            break;
+        } else {
+            isLineAvoidance = true;
+        }
     }
     if (positiveData[15]) {
         countStatement = false;
@@ -81,6 +97,9 @@ int Light_System::lineAvoidance() { //change to do logic AFTER reading (not in t
         fdegs = ((midSens-1)*22.5)-180;
     } else {
         fdegs = ((midSens-1)*22.5);
+    }
+    if (fdegs == 0) {
+        fdegs = 1;
     }
     return fdegs;
 }

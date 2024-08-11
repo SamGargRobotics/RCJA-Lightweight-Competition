@@ -13,6 +13,8 @@ public:
     void setMuxChannel(int channel);
     int lineAvoidance2();
     int lineAvoidance();
+    int lineAvoidance3() {return 0;};
+    bool isLineAvoidance = false;
 private:
     static const int NUM_SENSORS = NUM_LS; // Number of Light Sensors
     static const int NUM_MUX = NUMBER_MUX;
@@ -20,7 +22,7 @@ private:
     int pin_mux;
     int lightData[NUM_SENSORS];
     int muxList[4] = {LIGHT_PIN_DIGI_1, LIGHT_PIN_DIGI_2, LIGHT_PIN_DIGI_3, LIGHT_PIN_DIGI_4};
-    bool positiveData[NUM_SENSORS] = {false};
+    bool positiveData[NUM_SENSORS] = {0};
     int firstSens = 0;
     int lastSens = 0;
     int difference = 0;

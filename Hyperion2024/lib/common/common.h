@@ -21,6 +21,8 @@
 #define ADD_OR_SUBTRACT_ORBIT 60
 
 #define line_avoidance_thresh 800
+#define green_higherthan_thresh 0
+#define green_lowerthan_thresh 0
 
 #define MPU_CALIBRATION_COUNT 20
 #define MPU_CALIBRATION_TIME 50
