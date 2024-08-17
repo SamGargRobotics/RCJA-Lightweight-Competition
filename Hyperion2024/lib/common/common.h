@@ -1,4 +1,5 @@
 #include <math.h>
+#include <Arduino.h>
 
 #define PI 3.1415926535897932384626433832795
 #define HALF_PI 1.5707963267948966192313216916398
@@ -20,9 +21,24 @@
 #define SPEED_Y_INTERCEPT 68
 #define ADD_OR_SUBTRACT_ORBIT 60
 
-#define line_avoidance_thresh 800
 #define green_higherthan_thresh 0
 #define green_lowerthan_thresh 0
+
+float floatMod(float x, float m);
+ 
+float angleBetween(float angleCounterClockwise, float angleClockwise);
+ 
+float smallestAngleBetween(float angleCounterClockwise, float angleClockwise);
+ 
+int8_t findSign(float value);
+ 
+float midAngleBetween(float angleCounterClockwise, float angleClockwise);
+ 
+float smallestAngleBetween(float angleCounterClockwise, float angleClockwise);
+ 
+int8_t findSign(float value);
+ 
+bool angleIsInside(float angleBoundCounterClockwise, float angleBoundClockwise, float angleCheck);
 
 #define MPU_CALIBRATION_COUNT 20
 #define MPU_CALIBRATION_TIME 50
@@ -39,6 +55,7 @@
 
 #define NUM_LS 16
 #define NUMBER_MUX 4
+#define LS_OFFSET 180
 #define NUM_TSSP 12
 
 #define MOTOR_IGNORE_MOVEMENT 95

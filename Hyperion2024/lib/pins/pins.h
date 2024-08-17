@@ -14,19 +14,19 @@
 
 //Light Sensor Pins
 #define LIGHT_PIN A0
-#define LIGHT_PIN_DIGI_1 42
-#define LIGHT_PIN_DIGI_2 43
-#define LIGHT_PIN_DIGI_3 44
-#define LIGHT_PIN_DIGI_4 45
+#define LIGHT_PIN_DIGI_0 48
+#define LIGHT_PIN_DIGI_1 46
+#define LIGHT_PIN_DIGI_2 44
+#define LIGHT_PIN_DIGI_3 42
 
 //Motor Pins
-#define FRINA 51
-#define FRINB 50
+#define FRINA 45
+#define FRINB 49
 #define FRPWM 11
 
 #define BRINA 52
 #define BRINB 53 
-#define BRPWM 10 
+#define BRPWM 10
 
 #define BLINA 22
 #define BLINB 23

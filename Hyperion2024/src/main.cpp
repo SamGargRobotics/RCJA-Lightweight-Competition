@@ -19,48 +19,74 @@ initialize config = initialize();
 
 float compassVal = 0; //constant value of MPU
 float targetValue = 0; //target value of the MPU
-float ballDirection = 0; //direction of ball (tssps)
-float moveDir = 0; //direction to move (after orbit library calculation)
-float ballSpeedNum = 0; //tssp strength !!! CURRENTLY COMMENTED OUT
-bool flag1 = 0;
-float moveSpeed = 0;
-int ballStr = 0;
-int lineAvoidance = 0;
-double correction = 0;
+float ballDirection = 0; //ball direction
+float moveDir = 0; //move direction
+float prevDir = 0; //prev direction
+float ballSpeedNum = 0; //tssp strength
+float moveSpeed = 0;//speed to move at
+int ballStr = 0; //ball strength
+int lineAvoidance = 0; //lineavoidance movement value
+float lineAvoidance2 = 0; //lineavoidance movement value 2
+double correction = 0; //how much to correct value
 
 void initialize::calculate_final_movement() {
-  if (ls.isLineAvoidance == true) {
-    motors.update(moveSpeed, lineAvoidance, 0, correction);
+  //calculating the final movement based on other values
+  lineAvoidance2 = floatMod(prevDir+180, 360);
+  if (ls.lineAngle != -1) {
+    motors.update(moveSpeed, lineAvoidance2, 0, correction);
   } else {
     motors.update(moveSpeed, moveDir, 0, correction);
+    prevDir = moveDir;
   }
 }
 void initialize::reading_values() {
+  //anything you want to read in the forever loop goes here
   compass.update();
   ballDirection = tssp.read();
   compassVal = compass.heading;
   targetValue = compass.targetVal;
   ballStr = tssp.tsspStrength;
+  ls.read();
 }
+
+/*
+void Light_System::read() {
+    for (int i = 0; i < NUM_SENSORS; i++) {
+        for (int j = 0; j < NUM_MUX; j++) {
+            digitalWrite(muxList[j], (i >> j) & 0x01);
+        }
+        delayMicroseconds(10);
+        lightData[i] = analogRead(LIGHT_PIN);
+        Serial.print(lightData[i]);
+        Serial.print(" ");
+    }
+    Serial.println();
+}
+*/
+
 void initialize::initialize_sensors() {
+  //anything you want to intialize in the setup goes in here
+  Serial.begin(9600);
   ls.init();
   tssp.init();
   motors.init();
-  Serial.begin(9600);
   compass.init();
   compass.findTargetVal();
 }
 void initialize::printing() {
-  Serial.print(moveSpeed);
-  Serial.print(" ");
-  Serial.print(ballStr);
+  //any thing you want to print goes in here
+  for (int i = 0; i < 16; i++) {
+    Serial.print(ls.lightData[i]);
+    Serial.print("\t");
+  }
   Serial.println();
 }
 void initialize::logic() {
+  //anything that you want to calculate with functions goes in here
   moveDir = orbit.calculate_Direction3(ballDirection);
-  lineAvoidance = ls.lineAvoidance();
+  lineAvoidance = ls.update();
   moveSpeed = orbit.calculate_Speed(ballStr, ballDirection);
-  correction = compass_correct.update(compass.heading > 180 ? compass.heading - 360 : compass.heading, 0);
+  correction = compass_correct.update(compass.heading > 180 ? compass.heading - 360 : compass.heading, 0) - 5;
 }
 
 void setup() {
