@@ -42,12 +42,12 @@ void MPU::calibrate() {
         float gyroData[3];
         readGyroscope(gyroData);
         calibrationGyro += gyroData[2];
-        //delay(MPU_CALIBRATION_TIME);
+        delay(MPU_CALIBRATION_TIME);
     }
     calibrationGyro /= MPU_CALIBRATION_COUNT;
     update();
     float firstVal = heading;
-    //delay(100);
+    delay(100);
     update();
     float secondVal = heading;
     drift = secondVal - firstVal;

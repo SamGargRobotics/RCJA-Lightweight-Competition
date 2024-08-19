@@ -31,13 +31,14 @@ double correction = 0; //how much to correct value
 
 void initialize::calculate_final_movement() {
   //calculating the final movement based on other values
-  lineAvoidance2 = floatMod(prevDir+180, 360);
-  if (ls.lineAngle != -1) {
-    motors.update(moveSpeed, lineAvoidance2, 0, correction);
-  } else {
-    motors.update(moveSpeed, moveDir, 0, correction);
-    prevDir = moveDir;
-  }
+  // lineAvoidance2 = floatMod(prevDir+180, 360);
+  // if (ls.lineAngle != -1) {
+  //   motors.update(moveSpeed, moveDir, 0, correction);
+  // } else {
+  //   motors.update(moveSpeed, moveDir, 0, correction);
+  //   prevDir = moveDir;
+  // }
+  motors.update(100, 0, 0, 0);
 }
 void initialize::reading_values() {
   //anything you want to read in the forever loop goes here
@@ -75,11 +76,11 @@ void initialize::initialize_sensors() {
 }
 void initialize::printing() {
   //any thing you want to print goes in here
-  for (int i = 0; i < 16; i++) {
-    Serial.print(ls.lightData[i]);
-    Serial.print("\t");
-  }
-  Serial.println();
+  // for (int i = 0; i < 16; i++) {
+  //   Serial.print(ls.lightData[i]);
+  //   Serial.print("\t");
+  // }
+  // Serial.println();
 }
 void initialize::logic() {
   //anything that you want to calculate with functions goes in here
@@ -88,6 +89,12 @@ void initialize::logic() {
   moveSpeed = orbit.calculate_Speed(ballStr, ballDirection);
   correction = compass_correct.update(compass.heading > 180 ? compass.heading - 360 : compass.heading, 0) - 5;
 }
+
+        // if(i < 8){
+        //     lightData[15 - i] = analogRead(LIGHT_PIN);
+        // } else {
+        //     lightData[i - 8] = analogRead(LIGHT_PIN);
+        // }
 
 void setup() {
   config.initialize_sensors();

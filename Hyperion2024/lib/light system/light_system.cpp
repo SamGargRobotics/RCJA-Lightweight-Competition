@@ -111,7 +111,7 @@ float Light_System::update() { //change to do logic AFTER reading (not in the fu
         break;
     }
 
-    // Serial.println(lineAngle);
+    Serial.println(lineAngle);
 
     // bool countStatement = true; //true = clockwise, false = anticlockwise
     // for (int i = 0; i < NUM_SENSORS; i++) {

@@ -21,7 +21,7 @@ int Tssp_system::read() {
         for (int i = 0; i < NUM_TSSPS; i++) {
             readTssp[i] += (1 - digitalRead(tsspPins[i]));
         }
-        //delayMicroseconds(3);
+        delayMicroseconds(3);
     }
     // for (int i = 0; i < NUM_TSSPS; i++) {
     //     Serial.print(readTssp[i]);
